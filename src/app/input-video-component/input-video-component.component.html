@@ -1,0 +1,7 @@
+<h1>Input Video</h1>
+<div id="message"></div>
+<input type="file" (change)="onFileSelected($event)" accept="video/*"/>
+<video controls autoplay [id]="id">
+    Your browser does not support HTML5 video.
+</video>
+

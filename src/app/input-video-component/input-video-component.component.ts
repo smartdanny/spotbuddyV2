@@ -1,4 +1,5 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { ProcessVideoService } from '../process-video.service';
 
 @Component({
   selector: 'app-input-video-component',
@@ -12,7 +13,7 @@ export class InputVideoComponentComponent implements OnInit {
   public fileURL = 'null';
   public id = 'inputVideo'
 
-  constructor() {
+  constructor(private _processVideoService: ProcessVideoService) {
   }
 
   ngOnInit(): void {
@@ -27,5 +28,12 @@ export class InputVideoComponentComponent implements OnInit {
 
     var inputVideoElement = document.getElementById(this.id);
     inputVideoElement.setAttribute('src', this.fileURL);
+  }
+
+  onClick(event){
+    console.log('hai');
+
+    // I want to run the service I created
+    console.log(this._processVideoService.doSomething());
   }
 }

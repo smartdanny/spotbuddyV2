@@ -7,6 +7,7 @@ import { TestComponent } from './test/test.component';
 import { InputVideoComponentComponent } from './input-video-component/input-video-component.component';
 import { ProcessVideoService } from './process-video.service';
 import { OutputVideoComponentComponent} from './output-video-component/output-video-component.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { OutputVideoComponentComponent} from './output-video-component/output-vi
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [ProcessVideoService],
   bootstrap: [AppComponent]

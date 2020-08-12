@@ -15,10 +15,12 @@
     left: 0;
     right: 0;
     height: 60px;
+    /* display: inline-block; */
     display: flex;
     align-items: center;
-    vertical-align: auto;
-    /* text-align: center; */
+    /* vertical-align: auto; */
+    text-align: center;
+    justify-content: center;
     background-color: #1976d2;
     color: white;
     font-weight: 600;
@@ -26,8 +28,8 @@
 
   .content {
     display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
+    margin: 82px auto 32px; /* this is the margin on top */
+    /* padding: 0 16px; */
     max-width: 960px;
     /* flex-direction: column; */
     /* align-items: center; */
@@ -44,22 +46,29 @@
 
 
 <!-- Toolbar -->
-<div class="toolbar">
-  <!-- <div class="col"> -->
-    <h1>Welcome</h1>
-  <!-- </div> -->
+<div>
+  <div class="toolbar">
+    <!-- <div class="col"> -->
+      <h1>SQUAT 💪🏿 BUDDY</h1>
+    <!-- </div> -->
+  </div>
 </div>
+
 
 <!-- Content -->
 <div class="content">
   <div class="column">
-    <p>hai</p>
+    <!-- <p>hai</p> -->
     <app-input-video-component></app-input-video-component>
   </div>
   <div class="column">
-    <p>hello</p>
+    <!-- <p>hello</p> -->
     <app-output-video-component></app-output-video-component>
   </div>
+</div>
+
+<div class="content">
+  <div class="row"> Tings will be processed</div>
 </div>
 
 

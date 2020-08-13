@@ -2,6 +2,6 @@ div {
     column-gap: 40px;
 }
 
-video {
-    padding-top: 50px;
+::content {
+    background-color: lightblue;
 }

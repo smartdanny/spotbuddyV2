@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ProcessVideoService } from '../process-video.service';
 
 @Component({
   selector: 'app-input-video-component',
@@ -9,12 +9,12 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class InputVideoComponentComponent implements OnInit {
+  
   selectedFile = null;
   public fileURL = 'null';
-  public id = 'inputVideo';
-  public thisData = null;
+  public id = 'inputVideo'; // id of the video in HTML, @TODO: this is dumb fix it
 
-  constructor(private http: HttpClient) {
+  constructor(private processVideoService: ProcessVideoService) {
   }
 
   ngOnInit(): void {
@@ -23,39 +23,29 @@ export class InputVideoComponentComponent implements OnInit {
   onFileSelected(event) {
     // How to play local video w/ angular: https://stackoverflow.com/questions/50822572/how-to-play-a-local-video-file-using-videogular2
 
+    // get the file
     this.selectedFile = event.target.files[0];
     console.log('selectedFile: ', this.selectedFile);
 
-
+    // Create URL
     this.fileURL = URL.createObjectURL(this.selectedFile);
     console.log('fileURL: ', this.fileURL);
 
+    // Make it play the video in HTML
     var inputVideoElement = document.getElementById(this.id);
     inputVideoElement.setAttribute('src', this.fileURL);
   }
 
   async onClick(event){
+    // use processVideoService to send the video to starlette server
+    this.processVideoService.sendVideoToProcess();
+  }
 
-    // 'http://echo.jsontest.com/key/value'
+  async addVideo(event){
+    // adds the video and its url (which needed to be made here to update HTML(@TODO: maybe do this differently in the future))
+    // I think we can make the URL in processVideoService and return it after the video is added
 
-    // this.thisData = this.http.get('http://127.0.0.1:8000');
-    // console.log(this.thisData.toPromise().then(data => {
-    //   console.log(data);
-    // }));
-
-    // create blob from video
-    let blob = await fetch(this.fileURL).then(r => r.blob());
-
-    // upload video to starlette server
-    const formData: FormData = new FormData();
-    formData.append('upload_file', blob, 'thismyvid');
-    this.http.post('http://127.0.0.1:8000/postTest', formData).toPromise().then(data => {
-      console.log(data);
-    });
-
-    // formData.append('Image', image, image.name);
-    // formData.append('ComponentId', componentId);
-    // return this.http.post('/api/dashboard/UploadImage', formData);
-
+    // @TODO: I can move this funciton into the onFileSelected method, no reason to have a separate button
+    this.processVideoService.addVideo(this.selectedFile, this.fileURL);
   }
 }

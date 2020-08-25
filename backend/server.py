@@ -9,6 +9,10 @@ from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.middleware.cors import CORSMiddleware
 
+import json
+
+from process2 import start
+
 
 async def homepage(request):
     return JSONResponse({'hel': 'world'})
@@ -29,7 +33,21 @@ async def testAngular(request):
     f.write(contents)
     f.close()
 
-    return JSONResponse({'Test': 'TOV BOII'})
+    # WRITING THE FILE FUCKING WORKS FUCK YES 
+
+    # Next step:
+    # process the file, send bacc the poses
+
+    print("start frontend")
+
+    default_media = './testvid.mp4'
+    max_persons = 1
+
+    json_ting = start(default_media, max_persons)
+
+    print(json_ting)
+
+    return JSONResponse(json_ting)
 
 async def upload(request):
     form = await request.form()
